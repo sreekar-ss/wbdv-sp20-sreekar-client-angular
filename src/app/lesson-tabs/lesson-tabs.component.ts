@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {LessonServiceClient} from '../services/LessonServiceClient';
 
 @Component({
   selector: 'app-lesson-tabs',
@@ -8,7 +9,8 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class LessonTabsComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private service: LessonServiceClient,
+              private route: ActivatedRoute) { }
 
   lessons = [];
   moduleId = ''
@@ -20,8 +22,7 @@ export class LessonTabsComponent implements OnInit {
       this.moduleId = params.moduleId
       this.lessonId = params.lessonId
 
-      fetch(`https://wbdv-generic-server.herokuapp.com/api/siddulas/modules/${this.moduleId}/lessons`)
-        .then(response => response.json())
+      this.service.findLessonsForModule(this.moduleId)
         .then(lessons => this.lessons = lessons);
     });
   }

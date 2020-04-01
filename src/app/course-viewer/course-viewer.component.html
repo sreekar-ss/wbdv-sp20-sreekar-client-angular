@@ -1,9 +1,14 @@
-<a href="/courses">Close</a>
+<!--<a href="/courses">Close</a>-->
+<nav class="navbar navbar-light bg-primary">
 
-
-<h3>{{course.title}}</h3>
-
-<div class="row">
+    <button type="button" class="close" aria-label="Close" routerLink="/courses">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  <div class="col-11">
+    <h3>{{course.title}}</h3>
+  </div>
+</nav>
+<div class="row container-fluid" style="padding-top: 10px">
   <div class="col-4">
     <app-module-list></app-module-list>
   </div>
