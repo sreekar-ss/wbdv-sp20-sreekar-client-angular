@@ -16,10 +16,15 @@
   <ul class="list-group">
     <li class="list-group-item shadow list-group-item-action"
       *ngFor="let course of courses">
-      <a routerLink="/details/{{course._id}}">
+      <a routerLink="/courses/{{course._id}}">
         {{course.title}}
       </a>
   <!--    <button (click)="deleteCourse(course)">Delete</button>-->
+      <a class="float-right"
+         routerLink="/courses/{{course._id}}/quizzes">
+        Quizzes
+      </a>
+
     </li>
   </ul>
 </div>

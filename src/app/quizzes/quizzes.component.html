@@ -1,8 +1,14 @@
-<div>
+<div class="container">
   <h2>Quizzes</h2>
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let quiz of quizzes">
-      {{quiz.title}}
+    <li class="list-group-item shadow list-group-item-action" *ngFor="let quiz of quizzes">
+      <a routerLink="/courses/{{courseId}}/quizzes/{{quiz._id}}">
+        {{quiz.title}}
+      </a>
+      <a class="btn btn-primary float-right"
+         routerLink="/courses/{{courseId}}/quizzes/{{quiz._id}}">
+        Start
+      </a>
     </li>
   </ul>
 </div>

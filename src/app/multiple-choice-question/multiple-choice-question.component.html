@@ -1,3 +1,76 @@
 
-{{question.title}}
+<div class="container" [ngSwitch]="grading">
+  <div *ngSwitchCase="false">
+    <h5>{{question.question}}</h5>
+    <label class="list-group-item shadow list-group-item-action rounded"
+          *ngFor="let choice of question.choices">
+      <input
+        type="radio"
+        value="{{choice}}"
+        name="{{question._id}}"
+        [(ngModel)]="question.answer"
+      />
+      {{choice}}
+    </label>
+      Your Answer : {{question.answer}}
+      <br/>
+      <button class="btn btn-success" type="submit" (click)="grading=true">Grade</button>
+  </div>
 
+  <div *ngSwitchCase="true">
+
+    <span [hidden]="question.answer !== question.correct">
+      <div class="row">
+          <div class="col"><h5>{{question.question}}</h5></div>
+          <div class="col"><fa-icon class="float-right" [icon]="faCheck" [hidden]="question.answer !== question.correct"></fa-icon></div>
+      </div>
+      <label class="list-group-item shadow list-group-item-action rounded"
+             *ngFor="let choice of question.choices"
+             [class]="{'list-group-item-success': choice === question.correct}">
+        <input
+          type="radio"
+          value="{{choice}}"
+          name="{{question._id}}"
+          [checked]="question.answer === choice"
+        />
+        {{choice}}
+        <fa-icon class="float-right"
+                 [icon]="faCheck"
+                 [hidden]="question.answer !== choice"
+        ></fa-icon>
+      </label>
+    </span>
+    <span [hidden]="question.answer === question.correct">
+      <div class="row">
+          <div class="col"><h5>{{question.question}}</h5></div>
+          <div class="col"><fa-icon class="float-right" [icon]="faTimes" [hidden]="question.answer === question.correct"></fa-icon></div>
+      </div>
+      <label class="list-group-item shadow list-group-item-action rounded"
+             *ngFor="let choice of question.choices"
+             [class]="{'list-group-item-success': choice === question.correct, 'list-group-item-danger' : (question.answer === choice) && (choice !== question.correct)}">
+        <input
+          type="radio"
+          value="{{choice}}"
+          name="{{question._id}}"
+          [checked]="question.answer === choice"
+         />
+        {{choice}}
+        <fa-icon class="float-right"
+                 [icon]="faCheck"
+                 [hidden]="question.correct !== choice"
+        ></fa-icon>
+        <fa-icon class="float-right"
+                 [icon]="faTimes"
+                 [hidden]="question.answer !== choice"
+        ></fa-icon>
+
+      </label>
+    </span>
+
+  </div>
+
+
+
+
+
+</div>

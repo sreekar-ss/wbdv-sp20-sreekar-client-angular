@@ -8,13 +8,13 @@ import {QuizComponent} from './quiz/quiz.component';
 
 
 const routes: Routes = [
-  {path : 'quizzes/:quizId', component: QuizComponent},
-  {path : 'quizzes', component: QuizzesComponent},
+  {path : 'courses/:courseId/quizzes/:quizId', component: QuizComponent},
+  {path : 'courses/:courseId/quizzes', component: QuizzesComponent},
   {path : '', component: HomeComponent},
   {path : 'courses', component: CourseListComponent},
-  {path : 'details/:courseId', component: CourseViewerComponent},
-  {path : 'details/:courseId/modules/:moduleId', component: CourseViewerComponent},
-  {path : 'details/:courseId/modules/:moduleId/lessons/:lessonId', component: CourseViewerComponent}
+  {path : 'courses/:courseId', component: CourseViewerComponent},
+  {path : 'courses/:courseId/modules/:moduleId', component: CourseViewerComponent},
+  {path : 'courses/:courseId/modules/:moduleId/lessons/:lessonId', component: CourseViewerComponent}
 ];
 
 @NgModule({

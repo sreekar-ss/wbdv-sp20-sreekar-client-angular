@@ -1,7 +1,10 @@
 
-<h4>{{question.title}}</h4>
-<h5>{{question.question}}</h5>
-<label>
+<!--<h4>{{question.title}}</h4>-->
+<div [ngSwitch]="grading">
+
+<div class="container" *ngSwitchCase="false">
+  <h5>{{question.question}}</h5>
+  <label class="list-group-item shadow list-group-item-action rounded">
   <input
     type="radio"
     value="true"
@@ -9,8 +12,7 @@
     name="{{question._id}}"/>
   True
 </label>
-<br/>
-<label>
+<label class="list-group-item shadow list-group-item-action rounded">
   <input
     type="radio"
     value="false"
@@ -18,11 +20,97 @@
     name="{{question._id}}"/>
   False
 </label>
+  Your Answer : {{question.answer}}
+  <br/>
+  <button class="btn btn-success" type="submit" (click)="grading=true">Grade</button>
+</div>
 <br/>
-Your Answer : {{question.answer}}
-<br/>
-Correct Answer : {{question.correct}}
-<br/>
-<span [hidden]="question.answer !== question.correct">yay</span>
 
-<span [hidden]="question.answer === question.correct">OOp</span>
+  <div class="container" *ngSwitchCase="true">
+    <span [hidden]="question.answer !== question.correct">
+      <div class="row">
+          <div class="col"><h5>{{question.question}}</h5></div>
+          <div class="col"><fa-icon class="float-right" [icon]="faCheck" [hidden]="question.answer !== question.correct"></fa-icon></div>
+      </div>
+        <label class="list-group-item shadow list-group-item-action rounded"
+               [class]="{'list-group-item-success': question.correct === 'true'}">
+          <input
+            type="radio"
+            value="true"
+            name="{{question._id}}"
+            [checked]="question.answer === 'true'"
+          />
+          True
+          <fa-icon class="float-right"
+                   [icon]="faCheck"
+                   [hidden]="question.answer !== 'true'"
+          ></fa-icon>
+        </label>
+        <label
+          class="list-group-item shadow list-group-item-action rounded"
+          [class]="{'list-group-item-success': question.correct === 'false'}">
+          <input
+            type="radio"
+            value="false"
+            name="{{question._id}}"
+            [checked]="question.answer === 'false'"
+          /> False
+          <fa-icon class="float-right"
+                   [icon]="faCheck"
+                   [hidden]="question.answer !== 'false'"
+          ></fa-icon>
+        </label>
+    </span>
+    <span [hidden]="question.answer === question.correct">
+      <div class="row">
+          <div class="col"><h5>{{question.question}}</h5></div>
+          <div class="col"><fa-icon class="float-right" [icon]="faTimes" [hidden]="question.answer === question.correct"></fa-icon></div>
+      </div>
+
+      <label class="list-group-item shadow list-group-item-action rounded"
+             [class]="{'list-group-item-success': question.correct === 'true','list-group-item-danger': question.correct !== 'true'}">
+          <input
+            type="radio"
+            value="true"
+            name="{{question._id}}"
+            [checked]="question.answer === 'true'"
+          />
+          True
+          <fa-icon class="float-right"
+                   [icon]="faCheck"
+                   [hidden]="question.answer !== 'true'"
+          ></fa-icon>
+          <fa-icon class="float-right"
+                   [icon]="faTimes"
+                   [hidden]="question.answer === 'true'"
+                   ></fa-icon>
+        </label>
+        <label
+          class="list-group-item shadow list-group-item-action rounded"
+          [class]="{'list-group-item-success': question.correct === 'false','list-group-item-danger': question.correct !== 'false'}">
+            <input
+              type="radio"
+              value="false"
+              name="{{question._id}}"
+              [checked]="question.answer === 'false'"
+            /> False
+            <fa-icon class="float-right"
+                     [icon]="faCheck"
+                     [hidden]="question.answer !== 'false'"
+            ></fa-icon>
+            <fa-icon class="float-right"
+                     [icon]="faCheck"
+                     [hidden]="question.answer === 'false'"
+            ></fa-icon>
+          </label>
+    </span>
+
+  </div>
+
+</div>
+
+<!--Correct Answer : {{question.correct}}-->
+<!--<br/>-->
+
+
+
