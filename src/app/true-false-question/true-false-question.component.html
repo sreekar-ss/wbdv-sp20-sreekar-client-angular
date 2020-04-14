@@ -1,5 +1,5 @@
 
-<!--<h4>{{question.title}}</h4>-->
+
 <div [ngSwitch]="grading">
 
 <div class="container" *ngSwitchCase="false">
@@ -22,7 +22,8 @@
 </label>
   Your Answer : {{question.answer}}
   <br/>
-  <button class="btn btn-success" type="submit" (click)="grading=true">Grade</button>
+  <button class="btn btn-success" type="submit" (click)="submitAnswer()">Submit Answer</button>
+  <button class="btn btn-success float-right" type="submit" (click)="grading=true">Grade</button>
 </div>
 <br/>
 
