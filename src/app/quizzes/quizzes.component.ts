@@ -22,7 +22,7 @@ export class QuizzesComponent implements OnInit {
           this.quizzes = quizzes;
           return quizzes.map( quiz => {
             console.log(quiz._id);
-            return fetch(`http://localhost:3000/api/quizzes/${quiz._id}/attempts`)
+            return fetch(`https://wbdv-sp20-sreekar-node-server2.herokuapp.com/api/quizzes/${quiz._id}/attempts`)
               .then(response => response.json());
           });
         }).then(attemptPromises => {
